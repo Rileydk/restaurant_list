@@ -11,19 +11,19 @@ const restaurSchema = new Schema({
   category: {
     type: String
   },
+  rating: {
+    type: String
+  },
+  phone: {
+    type: String
+  },
   image: {
     type: String
   },
   location: {
     type: String
   },
-  phone: {
-    type: String
-  },
   google_map: {
-    type: String
-  },
-  rating: {
     type: String
   },
   description: {

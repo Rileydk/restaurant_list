@@ -2,11 +2,15 @@ header {
   overflow: hidden;
 }
 
-.navbar .navbar-brand {
+.navbar .navbar-brand, .navbar-icon {
   color: #4592af;
 }
 
 .navbar .navbar-brand:hover {
+  color: #226089;
+}
+
+.navbar-icon:hover {
   color: #226089;
 }
 
@@ -70,7 +74,7 @@ header {
   font-size: 0.8rem;
 }
 
-.restaurant-show-title {
+.show-title {
   position: relative;
   top: -100px;
   color: white;

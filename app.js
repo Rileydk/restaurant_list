@@ -2,6 +2,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 
 //// Include modules
 const Restaur = require('./models/restaurs_model.js')
@@ -36,6 +37,9 @@ app.set('view engine', 'hbs')
 //// Use static files
 app.use(express.static('public'))
 
+//// Process
+app.use(bodyParser.urlencoded({ extended: true }))
+
 //// Set routes
 // get Index
 app.get('/', (req, res) => {
@@ -57,6 +61,28 @@ app.get('/search', (req, res) => {
         item.category.toLowerCase().includes(keyword.toLowerCase()))
       res.render('index', { restaurs, keyword })
     })
+    .catch(error => console.error(error))
+})
+
+// get tp create new page
+app.get('/restaurants/new', (req, res) => {
+  res.render('new')
+})
+
+// create new
+app.post('/restaurants/new', (req, res) => {
+  let { name, name_en, category, rating, phone, image, location, google_map, description } = req.body
+
+  if (!name) {
+
+  }
+
+  if (!image) {
+    image = 'https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg'
+  }
+
+  Restaur.create({ name, name_en, category, rating, phone, image, location, google_map, description })
+    .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 })
 
