@@ -60,6 +60,15 @@ app.get('/search', (req, res) => {
     .catch(error => console.error(error))
 })
 
+// get details
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  Restaur.findById(id)
+    .lean()
+    .then(restaurant => res.render('detail', { restaurant }))
+    .catch(error => console.error(error))
+})
+
 //// Start server
 app.listen(port, () => {
   console.log(`app is running on http://localhost:${port}`)
