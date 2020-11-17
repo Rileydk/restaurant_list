@@ -37,11 +37,26 @@ app.set('view engine', 'hbs')
 app.use(express.static('public'))
 
 //// Set routes
+// get Index
 app.get('/', (req, res) => {
   Restaur.find()
     .lean()
     .sort({ _id: 'asc' })
     .then(restaurs => res.render('index', { restaurs }))
+    .catch(error => console.error(error))
+})
+
+// get search results
+app.get('/search', (req, res) => {
+  const keyword = req.query.keyword.trim()
+  Restaur.find()
+    .lean()
+    .then(list => {
+      const restaurs = list.filter(item =>
+        item.name.toLowerCase().includes(keyword.toLowerCase()) ||
+        item.category.toLowerCase().includes(keyword.toLowerCase()))
+      res.render('index', { restaurs, keyword })
+    })
     .catch(error => console.error(error))
 })
 
