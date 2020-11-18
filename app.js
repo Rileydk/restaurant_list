@@ -80,7 +80,11 @@ app.get('/restaurants/:id', (req, res) => {
 
 // get to edit page
 app.get('/restaurants/:id/edit', (req, res) => {
-
+  const id = req.params.id
+  Restaur.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.error(error))
 })
 
 // create new
@@ -95,6 +99,9 @@ app.post('/restaurants/new', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 })
+
+//// Save edit
+// app.put()
 
 //// Start server
 app.listen(port, () => {

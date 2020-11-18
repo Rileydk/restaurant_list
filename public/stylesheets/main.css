@@ -69,6 +69,11 @@ header {
   white-space:nowrap;
 }
 
+#edit-restaurant-image {
+  width: 30%;
+  height: 30%;
+}
+
 .restaurant-category {
   color: #666666;
   font-size: 0.8rem;
