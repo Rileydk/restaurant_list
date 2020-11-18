@@ -25,7 +25,8 @@
           {{#each restaurs}}
             <a href="/restaurants/{{ this._id }}" class="text-secondary">
               <div class="card mb-3">
-                <img class="card-img-top" src="{{ this.image }}" alt="{{ this.name }}">
+                <img class="card-img-top" src="{{ this.image }}" alt="{{ this.name }}"
+                  onerror="this.src='https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg'">
                 <div class="card-body p-3">
                   <h6 class="card-title mb-1">{{ this.name }}</h6>
 
