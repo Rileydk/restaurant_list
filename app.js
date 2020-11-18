@@ -1,5 +1,13 @@
+// LOGO、增加餐廳、icon顏色
+// 表單排版調整
+// 刪除前先跳出警示
+// 增加兩筆以上排版會出錯
+// detail頁排版調整
+// 觀摩
+
 //// Include packages
 const express = require('express')
+const app = express()
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
@@ -9,7 +17,6 @@ const methodOverride = require('method-override')
 const Restaur = require('./models/restaurs_model.js')
 
 //// Define variables
-const app = express()
 const port = 3000
 
 //// Connect db
