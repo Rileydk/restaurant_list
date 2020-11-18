@@ -3,6 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 //// Include modules
 const Restaur = require('./models/restaurs_model.js')
@@ -39,6 +40,7 @@ app.use(express.static('public'))
 
 //// Process
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 //// Set routes
 // get Index
@@ -101,7 +103,30 @@ app.post('/restaurants/new', (req, res) => {
 })
 
 //// Save edit
-// app.put()
+app.put('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  let { name, name_en, category, rating, phone, image, location, google_map, description } = req.body
+
+  if (!image) {
+    image = 'https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg'
+  }
+
+  Restaur.findById(id)
+    .then(restaur => {
+      restaur.name = name,
+        restaur.name_en = name_en,
+        restaur.category = category,
+        restaur.rating = rating,
+        restaur.phone = phone,
+        restaur.image = image,
+        restaur.location = location,
+        restaur.google_map = google_map,
+        restaur.description = description
+      restaur.save()
+    })
+    .then(() => res.redirect('/'))
+    .catch(error => console.error(error))
+})
 
 //// Start server
 app.listen(port, () => {
