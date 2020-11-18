@@ -10,9 +10,12 @@
         <a href="/restaurants/{{ restaurant._id }}/edit">
           <i class="fas fa-edit fa-lg mr-2"></i>
         </a>
-        <form action="">
-          <i class="fas fa-trash-alt fa-lg"></i>
+        <form action="/restaurants/{{ restaurant._id }}/delete?_method=DELETE" method="POST">
+          <button type="submit" id="btn-delete">
+            <i type="submit" class="fas fa-trash-alt fa-lg"></i>
+          </button>
         </form>
+        </i>
       </div>
 
       <p class="mb-1">

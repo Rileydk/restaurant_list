@@ -128,6 +128,15 @@ app.put('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.error(error))
 })
 
+//// Delete
+app.delete('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  Restaur.findById(id)
+    .then(restaurants => restaurants.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.error(error))
+})
+
 //// Start server
 app.listen(port, () => {
   console.log(`app is running on http://localhost:${port}`)
