@@ -64,9 +64,23 @@ app.get('/search', (req, res) => {
     .catch(error => console.error(error))
 })
 
-// get tp create new page
+// get to create new page
 app.get('/restaurants/new', (req, res) => {
   res.render('new')
+})
+
+// get details
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  Restaur.findById(id)
+    .lean()
+    .then(restaurant => res.render('detail', { restaurant }))
+    .catch(error => console.error(error))
+})
+
+// get to edit page
+app.get('/restaurants/:id/edit', (req, res) => {
+
 })
 
 // create new
@@ -79,15 +93,6 @@ app.post('/restaurants/new', (req, res) => {
 
   Restaur.create({ name, name_en, category, rating, phone, image, location, google_map, description })
     .then(() => res.redirect('/'))
-    .catch(error => console.error(error))
-})
-
-// get details
-app.get('/restaurants/:id', (req, res) => {
-  const id = req.params.id
-  Restaur.findById(id)
-    .lean()
-    .then(restaurant => res.render('detail', { restaurant }))
     .catch(error => console.error(error))
 })
 

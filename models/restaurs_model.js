@@ -12,7 +12,7 @@ const restaurSchema = new Schema({
     type: String
   },
   rating: {
-    type: String
+    type: Number
   },
   phone: {
     type: String
