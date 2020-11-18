@@ -42,7 +42,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
-//// Set routes
+//// Set routers
 // get Index
 app.get('/', (req, res) => {
   Restaur.find()
