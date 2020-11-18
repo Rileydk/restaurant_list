@@ -74,6 +74,10 @@ header {
   font-size: 0.8rem;
 }
 
+.required-column {
+  color: red;
+}
+
 .show-title {
   position: relative;
   top: -100px;

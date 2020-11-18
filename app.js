@@ -73,10 +73,6 @@ app.get('/restaurants/new', (req, res) => {
 app.post('/restaurants/new', (req, res) => {
   let { name, name_en, category, rating, phone, image, location, google_map, description } = req.body
 
-  if (!name) {
-
-  }
-
   if (!image) {
     image = 'https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg'
   }
