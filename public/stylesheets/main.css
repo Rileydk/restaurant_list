@@ -2,16 +2,23 @@ header {
   overflow: hidden;
 }
 
-.navbar .navbar-brand, .navbar-icon {
-  color: #4592af;
+.navbar .navbar-brand {
+  color: #9b4b4b !important;
+  font-family: 'Pacifico', cursive;
+  font-size: 1.5rem;  
 }
 
 .navbar .navbar-brand:hover {
-  color: #226089;
+  color: #783a3a !important;
 }
 
-.navbar-icon:hover {
-  color: #226089;
+.navbar .navbar-element {
+  text-decoration: none;
+  color: #9b4b4b !important;
+}
+
+.navbar .navbar-element:hover {
+  color: #783a3a !important;
 }
 
 .banner {
@@ -96,6 +103,34 @@ header {
   text-align: center;
   font-size: 3rem;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.index-icon {
+  color: #9b4b4b;
+}
+
+.submit-btn {
+  color: white !important;
+  background-color: #9b4b4b !important;
+}
+
+.submit-btn:hover {
+  background-color: #783a3a !important;
+}
+
+textarea {
+  width: 100%;
+  padding: .375rem .75rem;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  color: #495057;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+textarea:focus {
+  outline: none !important;
+  border-color: #32a1f0;
+  box-shadow: 0 0 0 3px rgba(171, 205, 237, 10);
 }
 
 @media screen and (max-width: 992px) {

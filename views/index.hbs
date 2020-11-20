@@ -41,14 +41,14 @@
 
                   <div class="d-flex justify-content-around">
                     <a href="/restaurants/{{ this._id }}">
-                      <i class="fas fa-info-circle"></i>
+                      <i class="fas fa-info-circle fa-sm index-icon"></i>
                     </a>
                     <a href="/restaurants/{{ this._id }}/edit">
-                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-edit fa-sm index-icon"></i>
                     </a>
                     <form action="/restaurants/{{ this._id }}/delete?_method=DELETE" method="POST">
                       <button type="submit" id="btn-delete">
-                        <i type="submit" class="fas fa-trash-alt"></i>
+                        <i type="submit" class="fas fa-trash-alt fa-sm index-icon"></i>
                       </button>
                     </form>
                   </div>
