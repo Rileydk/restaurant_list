@@ -1,11 +1,3 @@
-// 刪除前先跳出警示
-
-// sort
-// index按鈕改為右上角下拉選單
-// paginator(收攏頁面)
-// detail頁排版調整
-// 觀摩
-
 //// Include packages
 const express = require('express')
 const app = express()
