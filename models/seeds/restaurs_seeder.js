@@ -1,21 +1,8 @@
-const mongoose = require('mongoose')
+const db = require('../../config/mongoose')
 const Restaur = require('../restaurs_model.js')
 const data = require('../../restaurs_data.json')
 
-mongoose.connect('mongodb://localhost/restaurants_list_2', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-
-const db = mongoose.connection
-
-db.on('error', () => {
-  console.log('mongodb error!')
-})
-
 db.once('open', () => {
-  console.log('mongodb connected!')
-
   data.results.forEach(item => {
     Restaur.create({
       name: item.name,
@@ -29,6 +16,5 @@ db.once('open', () => {
       description: item.description
     })
   })
-
   console.log('seed data created!')
 })

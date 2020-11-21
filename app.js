@@ -1,6 +1,8 @@
 // 使用config重構
 // 搜尋列調整位置樣式
 // 取消card-list排序方式
+// 非搜尋時而無資料時修改顯示資訊
+// 調整無搜尋結果時之樣式
 // 增加排序選項（類別：、排序方法：A-Z、評價）
 //// 依建立時間序：近到遠、遠到近
 //// 依名稱：A-Z、Z-A
@@ -16,8 +18,6 @@
 
 //// Include packages
 const express = require('express')
-const app = express()
-const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
@@ -25,22 +25,11 @@ const methodOverride = require('method-override')
 //// Include modules
 const routes = require('./routes')
 const Restaur = require('./models/restaurs_model.js')
+require('./config/mongoose')
 
 //// Define variables
+const app = express()
 const port = 3000
-
-//// Connect db
-mongoose.connect('mongodb://localhost/restaurants_list_2', { useNewUrlParser: true, useUnifiedTopology: true })
-
-const db = mongoose.connection
-
-db.on('error', () => {
-  console.log('mongodb error!')
-})
-
-db.once('open', () => {
-  console.log('mongodb connected!')
-})
 
 //// Set template engine
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
