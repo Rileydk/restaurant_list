@@ -1,3 +1,19 @@
+// 使用config重構
+// 搜尋列調整位置樣式
+// 取消card-list排序方式
+// 增加排序選項（類別：、排序方法：A-Z、評價）
+//// 依建立時間序：近到遠、遠到近
+//// 依名稱：A-Z、Z-A
+//// 依類別：A-Z、Z-A
+//// 依評價：高到低、低到高
+// 修改detail樣式
+// 編輯頁面標頭、未填入詳細資料時樣式
+// 類別改為選單式，可自行增加類別，增加篩選器
+
+// 增加分頁器
+// 使用更好的方法，從資料庫就做篩選，而非全部取回再filter
+// 如何整理使用的圖片？asset？
+
 //// Include packages
 const express = require('express')
 const app = express()
@@ -7,16 +23,14 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
 //// Include modules
+const routes = require('./routes')
 const Restaur = require('./models/restaurs_model.js')
 
 //// Define variables
 const port = 3000
 
 //// Connect db
-mongoose.connect('mongodb://localhost/restaurants_list_2', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+mongoose.connect('mongodb://localhost/restaurants_list_2', { useNewUrlParser: true, useUnifiedTopology: true })
 
 const db = mongoose.connection
 
@@ -29,10 +43,7 @@ db.once('open', () => {
 })
 
 //// Set template engine
-app.engine('hbs', exphbs({
-  defaultLayout: 'main',
-  extname: '.hbs'
-}))
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
 //// Use static files
@@ -42,102 +53,19 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
+app.use(routes)
 //// Set routes
-// get Index
-app.get('/', (req, res) => {
-  Restaur.find()
-    .lean()
-    .sort({ _id: 'asc' })
-    .then(restaurs => res.render('index', { restaurs }))
-    .catch(error => console.error(error))
-})
-
-// get search results
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword.trim()
-  Restaur.find()
-    .lean()
-    .then(list => {
-      const restaurs = list.filter(item =>
-        item.name.toLowerCase().includes(keyword.toLowerCase()) ||
-        item.category.toLowerCase().includes(keyword.toLowerCase()))
-      res.render('index', { restaurs, keyword })
-    })
-    .catch(error => console.error(error))
-})
-
-// get to create new page
-app.get('/restaurants/new', (req, res) => {
-  res.render('new')
-})
-
-// get details
-app.get('/restaurants/:id', (req, res) => {
-  const id = req.params.id
-  Restaur.findById(id)
-    .lean()
-    .then(restaurant => res.render('detail', { restaurant }))
-    .catch(error => console.error(error))
-})
-
-// get to edit page
-app.get('/restaurants/:id/edit', (req, res) => {
-  const id = req.params.id
-  Restaur.findById(id)
-    .lean()
-    .then(restaurant => res.render('edit', { restaurant }))
-    .catch(error => console.error(error))
-})
-
-// create new
-app.post('/restaurants/new', (req, res) => {
-  let { name, name_en, category, rating, phone, image, location, google_map, description } = req.body
-
-  if (!image) {
-    image = 'https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg'
-  }
-
-  Restaur.create({ name, name_en, category, rating, phone, image, location, google_map, description })
-    .then(() => res.redirect('/'))
-    .catch(error => console.error(error))
-})
-
-//// Save edit
-app.put('/restaurants/:id/edit', (req, res) => {
-  const id = req.params.id
-  let { name, name_en, category, rating, phone, image, location, google_map, description } = req.body
-
-  if (!image) {
-    image = 'https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg'
-  }
-
-  Restaur.findById(id)
-    .then(restaur => {
-      restaur.name = name,
-        restaur.name_en = name_en,
-        restaur.category = category,
-        restaur.rating = rating,
-        restaur.phone = phone,
-        restaur.image = image,
-        restaur.location = location,
-        restaur.google_map = google_map,
-        restaur.description = description
-      restaur.save()
-    })
-    .then(() => res.redirect('/'))
-    .catch(error => console.error(error))
-})
 
 //// Delete
-app.delete('/restaurants/:id/delete', (req, res) => {
-  const id = req.params.id
-  Restaur.findById(id)
-    .then(restaurants => restaurants.remove())
-    .then(() => res.redirect('/'))
-    .catch(error => console.error(error))
-})
+// app.delete('/restaurants/:id/delete', (req, res) => {
+//   const id = req.params.id
+//   Restaur.findById(id)
+//     .then(restaurants => restaurants.remove())
+//     .then(() => res.redirect('/'))
+//     .catch(error => console.error(error))
+// })
 
 //// Start server
 app.listen(port, () => {
-  console.log(`app is running on http://localhost:${port}`)
+  console.log(`${new Date().getHours()}:${new Date().getMinutes()} app is running on http://localhost:${port}`)
 })
