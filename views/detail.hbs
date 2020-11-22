@@ -5,14 +5,14 @@
 
       <div class="d-flex justify-content-end">
         <a href="/">
-          <i class="fas fa-home fa-lg mr-2"></i>
+          <i class="detail-icon fas fa-home fa-lg mr-2"></i>
         </a>
         <a href="/restaurants/{{ restaurant._id }}/edit">
-          <i class="fas fa-edit fa-lg mr-2"></i>
+          <i class="detail-icon fas fa-edit fa-lg mr-2"></i>
         </a>
         <form action="/restaurants/{{ restaurant._id }}/delete?_method=DELETE" method="POST">
-          <button type="submit" id="btn-delete">
-            <i class="fas fa-trash-alt fa-lg"></i>
+          <button type="submit" class="btn-delete">
+            <i class="detail-icon fas fa-trash-alt fa-lg"></i>
           </button>
         </form>
         </i>
