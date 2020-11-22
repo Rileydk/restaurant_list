@@ -32,6 +32,10 @@ header {
   filter: blur(3px);
 }
 
+#home-page-title {
+  font-family: 'Pacifico', cursive;
+}
+
 #search-bar {
   max-width: 400px;
   border: 1px solid #ced4da;

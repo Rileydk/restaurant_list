@@ -1,6 +1,7 @@
-<p>{{test}}</p>
+{{!-- 為什麼加上title後每一頁的下方部分都往下降了？ --}}
+<h1 id="home-page-title" class="mb-1 show-title">Dinery</h1>
 
-<div class="d-flex justify-content-around mt-4 align-items-center">
+<div class="d-flex justify-content-around align-items-center">
   {{!-- Search bar --}}
   <form action="/search">
     <div id="search-bar" class="input-group rounded-pill ml-2">
@@ -27,7 +28,7 @@
           {{#unless sortCategoryPre}}
             選擇排序方式
           {{else}}
-            已選取類別
+            已選取排序類別
           {{/unless}}
         </p>
       </button>
@@ -56,11 +57,12 @@
 </div>
 
 {{!-- restaurant list --}}
-<div class="container mt-5">
+<div class="container mt-5 mx-auto">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto d-flex justify-content-center">
       {{#if restaurs}}
         <div class="card-columns">
+          {{!-- <div class="row row-cols-3 row-cols-sm-2"> --}}
           {{#each restaurs}}
             <a href="/restaurants/{{ this._id }}" class="text-secondary">
               <div class="card mb-3">
@@ -96,6 +98,7 @@
               </div>
             </a>
           {{/each}}
+          {{!-- </div> --}}
         </div>
       {{else}}
         <div class="d-flex justify-content-center align-items-center p-2">
@@ -109,4 +112,5 @@
 
     </div>
   </div>
+
 </div>
