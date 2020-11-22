@@ -1,5 +1,5 @@
 {{!-- Search bar --}}
-<div class="container search-bar">
+{{!-- <div class="container search-bar">
   <div class="search-bar-outer">
     <div class="search-bar-inner">
       <form action="/search">
@@ -14,7 +14,22 @@
       </form>
     </div>
   </div>
-</div>
+</div> --}}
+<form action="/search">
+  <div id="search-bar" class="input-group rounded-pill mt-4 ml-5">
+    <select class="custom-select" id="search-bar-category-option" disabled>
+      <option value="">篩選類別</option>
+      <option value="1">日本料理</option>
+      <option value="2">義式餐廳</option>
+      <option value="3">中東料理</option>
+    </select>
+    <input id="search-bar-input" type="text" name="keyword" class="form-control" placeholder="輸入餐廳名稱"
+      aria-label="Restaurant Name or Category..." value="{{ keyword }}" aria-describedby="search-button">
+    <div class="input-group-append" id="search-button-container">
+      <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+    </div>
+  </div>
+</form>
 
 {{!-- restaurant list --}}
 <div class="container mt-5">

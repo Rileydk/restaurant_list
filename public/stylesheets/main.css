@@ -32,29 +32,27 @@ header {
   filter: blur(3px);
 }
 
-.search-bar .search-bar-outer {
-  margin: 0 auto;
-  max-width: 680px;
-  background-color: #fce2cf;
-  border-radius: 8px;
-  padding: 20px 30px;
-  border: 0;
-  margin-top: -60px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+#search-bar {
+  max-width: 400px;
+  border: 1px solid #ced4da;
 }
 
-.search-bar .search-bar-inner h4 {
-  color: #9b4b4b;
+#search-bar-category-option {
+  max-width: 105px;
+  background-color: transparent;
+  border: none;
+  border-top-left-radius: 50rem;
+  border-bottom-left-radius: 50rem; 
+}
+
+#search-bar-input {
+  border: none;
+  border-left: 1px solid #ced4da;
 }
 
 .form-control::placeholder {
   color: #aaaaaa;
   font-size: 0.8rem;
-}
-
-.btn-major {
-  background-color: #9b4b4b;
-  color: white;
 }
 
 .btn-delete {
