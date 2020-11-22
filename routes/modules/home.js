@@ -12,6 +12,8 @@ router.get('/', (req, res) => {
 })
 
 router.get('/search', (req, res) => {
+  const search = 1
+  console.log(search)
   const keyword = req.query.keyword.trim()
   Restaur.find()
     .lean()
@@ -19,7 +21,7 @@ router.get('/search', (req, res) => {
       const restaurs = list.filter(item =>
         item.name.toLowerCase().includes(keyword.toLowerCase()) ||
         item.category.toLowerCase().includes(keyword.toLowerCase()))
-      res.render('index', { restaurs, keyword })
+      res.render('index', { restaurs, keyword, search })
     })
     .catch(error => console.error(error))
 })

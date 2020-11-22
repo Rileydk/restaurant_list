@@ -1,20 +1,4 @@
 {{!-- Search bar --}}
-{{!-- <div class="container search-bar">
-  <div class="search-bar-outer">
-    <div class="search-bar-inner">
-      <form action="/search">
-        <h4 class="mb-2">尋找餐廳：</h4>
-        <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳名稱或分類"
-            aria-label="Restaurant Name or Category..." value="{{ keyword }}" aria-describedby="search-button">
-          <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div> --}}
 <form action="/search">
   <div id="search-bar" class="input-group rounded-pill mt-4 ml-5">
     <select class="custom-select" id="search-bar-category-option" disabled>
@@ -26,7 +10,7 @@
     <input id="search-bar-input" type="text" name="keyword" class="form-control" placeholder="輸入餐廳名稱"
       aria-label="Restaurant Name or Category..." value="{{ keyword }}" aria-describedby="search-button">
     <div class="input-group-append" id="search-button-container">
-      <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+      <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search text-dark"></i></button>
     </div>
   </div>
 </form>
@@ -34,7 +18,7 @@
 {{!-- restaurant list --}}
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-10 col-12 mx-auto">
+    <div class="col-md-10 col-12 mx-auto d-flex justify-content-center">
       {{#if restaurs}}
         <div class="card-columns">
           {{#each restaurs}}
@@ -74,8 +58,12 @@
           {{/each}}
         </div>
       {{else}}
-        <div class="d-flex justify-content-center">
-          <p>No Search Result</p>
+        <div class="d-flex justify-content-center align-items-center p-2">
+          {{#unless search}}
+            <p class="message text-dark">Add your first favorite restaurant !</p>
+          {{else}}
+            <p class="message text-dark">You haven't add "{{ keyword }}" to your list, add it now !</p>
+          {{/unless}}
         </div>
       {{/if}}
 
