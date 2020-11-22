@@ -1,19 +1,59 @@
-{{!-- Search bar --}}
-<form action="/search">
-  <div id="search-bar" class="input-group rounded-pill mt-4 ml-5">
-    <select class="custom-select" id="search-bar-category-option" disabled>
-      <option value="">篩選類別</option>
-      <option value="1">日本料理</option>
-      <option value="2">義式餐廳</option>
-      <option value="3">中東料理</option>
-    </select>
-    <input id="search-bar-input" type="text" name="keyword" class="form-control" placeholder="輸入餐廳名稱"
-      aria-label="Restaurant Name or Category..." value="{{ keyword }}" aria-describedby="search-button">
-    <div class="input-group-append" id="search-button-container">
-      <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search text-dark"></i></button>
+<p>{{test}}</p>
+
+<div class="d-flex justify-content-around mt-4 align-items-center">
+  {{!-- Search bar --}}
+  <form action="/search">
+    <div id="search-bar" class="input-group rounded-pill ml-2">
+      <select class="custom-select" id="search-bar-category-option" disabled>
+        <option value="">篩選類別</option>
+        <option value="1">日本料理</option>
+        <option value="2">義式餐廳</option>
+        <option value="3">中東料理</option>
+      </select>
+      <input id="search-bar-input" type="text" name="keyword" class="form-control" placeholder="輸入餐廳名稱"
+        aria-label="Restaurant Name or Category..." value="{{ keyword }}" aria-describedby="search-button">
+      <div class="input-group-append">
+        <button class="btn btn-major" type="submit"><i class="fas fa-search text-dark"></i></button>
+      </div>
     </div>
+  </form>
+
+  {{!-- Sort --}}
+  <div class="mr-2">
+    <div class="dropdown d-inline">
+      <button class="btn dropdown-toggle sort-dropdowns" type="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <p class="d-inline text-left text-muted">
+          {{#unless sortCategoryPre}}
+            選擇排序方式
+          {{else}}
+            已選取類別
+          {{/unless}}
+        </p>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item {{#selected sortCategoryPre '_id'}}active{{/selected}}" href="/sort/_id">建立時間</a>
+        <a class="dropdown-item {{#selected sortCategoryPre 'name'}}active{{/selected}}" href="/sort/name">名稱</a>
+        <a class="dropdown-item {{#selected sortCategoryPre 'rating'}}active{{/selected}}" href="/sort/rating">評價</a>
+      </div>
+    </div>
+
+    {{#if sortCategoryPre}}
+      <div class="dropdown d-inline" disabled>
+        <button class="btn dropdown-toggle sort-dropdowns" type="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <p class="d-inline text-left text-muted">排序方式</p>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item {{#selected sortOrder 'desc'}}active{{/selected}}"
+            href="/sort/category/desc">{{sortOrderDesc}}</a>
+          <a class="dropdown-item {{#selected sortOrder 'asc'}}active{{/selected}}"
+            href="/sort/category/asc">{{sortOrderAsc}}</a>
+        </div>
+      </div>
+    {{/if}}
   </div>
-</form>
+</div>
 
 {{!-- restaurant list --}}
 <div class="container mt-5">
@@ -59,7 +99,7 @@
         </div>
       {{else}}
         <div class="d-flex justify-content-center align-items-center p-2">
-          {{#unless search}}
+          {{#unless searchStatus}}
             <p class="message text-dark">Add your first favorite restaurant !</p>
           {{else}}
             <p class="message text-dark">You haven't add "{{ keyword }}" to your list, add it now !</p>

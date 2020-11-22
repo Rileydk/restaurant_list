@@ -50,6 +50,11 @@ header {
   border-left: 1px solid #ced4da;
 }
 
+.sort-dropdowns {
+  min-width: 100px;
+  border: 1px solid #ced4da !important;
+}
+
 .form-control::placeholder {
   color: #aaaaaa;
   font-size: 0.8rem;
